@@ -3,7 +3,7 @@
     <Card class="w-full max-w-[400px]">
       <template #title>{{ 'Faça seu registro' }}</template>
       <template #content>
-        <!-- Corrigido para @submit.prevent -->
+    
         <form class="flex flex-col gap-4" @submit.prevent="register">
           <label class="flex flex-col gap-2">
             name
@@ -19,14 +19,14 @@
 
           <label class="flex flex-col gap-2">
             password
-            <!-- Corrigido para toggle-mask -->
+          
             <Password v-model="form.password" :feedback="false" toggle-mask />
             <Error :value="v$.form" field="password" />
           </label>
 
           <label class="flex flex-col gap-2">
             confirmPassword
-            <!-- Corrigido para toggle-mask -->
+            
             <Password v-model="form.confirmPassword" :feedback="false" toggle-mask />
             <Error :value="v$.form" field="confirmPassword" />
           </label>
@@ -73,7 +73,7 @@ export default defineComponent({
         name: { required },
         email: { required, email: emailValidator },
         password: { required, minLength: minLength(6) },
-        // Adicionado: valida que a confirmação é igual à senha
+        
         confirmPassword: {
           required,
           sameAsPassword: helpers.withMessage('As senhas não coincidem', sameAs(this.form.password)),
@@ -83,10 +83,10 @@ export default defineComponent({
   },
   methods: {
     async register() {
-      // Valida o formulário
+     
       const isFormCorrect = await this.v$.$validate()
 
-      // Se houver erros, para a execução e exibe no console para debug
+     
       if (!isFormCorrect) {
         console.log('Erros de validação:', this.v$.$errors)
         return
@@ -98,7 +98,7 @@ export default defineComponent({
         password: this.form.password,
       }
       this.loading = true
-      // Chamada da API
+
       await this.rest
         .register(body)
         .then((res) => {
@@ -113,7 +113,7 @@ export default defineComponent({
             life: 3000,
           })
 
-          // Após o registro, redireciona para a tela de login
+          
           this.$router.push({ name: 'login' })
           console.log('Registro realizado com sucesso!')
         })
