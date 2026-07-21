@@ -5,7 +5,7 @@
       <p class="text-slate-400">Bem-vindo à área administrativa do seu e-commerce.</p>
     </header>
 
-    <!-- Cards utilizando o componente <Card> do PrimeVue -->
+   
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
       <Card class="bg-slate-800 border border-slate-700 text-white">
         <template #title><span class="text-slate-400 text-sm font-semibold uppercase">Vendas Mensais</span></template>
