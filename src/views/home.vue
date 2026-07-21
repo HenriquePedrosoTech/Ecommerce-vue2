@@ -7,7 +7,6 @@
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full bg-amber-400 gap-4 p-4 rounded-lg"
       >
         <div v-for="product in products" :key="product.name">
-          <!-- Alinhado o nome para goToDetail para bater com o script -->
           <div>
             <ProductCard :product="product" @on-click="addItem" @on-decrease="decItem" />
           </div>
@@ -78,7 +77,7 @@ export default defineComponent({
     return {
       cart: new Cart(),
 
-      // Corrigido: Agora passando o ID como primeiro parâmetro exigido pelo construtor de Product
+  
       products: [] as Product[],
 
     }
@@ -151,7 +150,7 @@ export default defineComponent({
       )
     },
 
-    // Corrigido o nome do método para "goToDetail" para coincidir com o template
+  
     goToDetail(product: Product) {
       const id = product.id
       this.$router.push({ path: `/products/${id}` })
@@ -159,8 +158,7 @@ export default defineComponent({
     getProducts(){
       const params = {page:1, limit:10}
       this.rest.getAll(params).then((res) =>{
-        // Corrigido: o HttpClient já retorna o conteúdo desembrulhado (res.data.data do axios),
-        // então aqui não precisamos acessar "res.data.data" de novo, e sim "res.data"
+     
         this.products = res.data.map((product:Product)=> {
           return new Product(product.id, product.name, product.description, product.price, 0, product.images)
         })
